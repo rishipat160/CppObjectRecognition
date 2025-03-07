@@ -1,18 +1,20 @@
 # C++ Object Recognition
 
-A computer vision project that implements real-time object detection and classification using OpenCV and custom feature extraction.
+A computer vision project that implements real-time object detection and classification using OpenCV and custom feature extraction. This project emphasizes manual implementation of core algorithms rather than relying on built-in OpenCV functions.
 
 ## Overview
 
 This project demonstrates object recognition using traditional computer vision techniques. It processes video input to detect objects through thresholding, extracts shape-based features, and classifies objects using a nearest-neighbor approach with various distance metrics.
 
-The implementation includes:
-- Adaptive thresholding with saturation adjustment
+The implementation includes custom-built algorithms for:
+- Adaptive thresholding with saturation adjustment (implemented from scratch)
 - Morphological operations for noise reduction
 - Connected component analysis for object detection
 - Feature extraction (fill ratio, aspect ratio, Hu moments)
 - Object classification with multiple distance metrics
 - Real-time visualization of detected objects
+
+Many core algorithms are implemented manually using direct matrix (Mat) manipulation rather than relying on OpenCV's built-in functions, providing deeper understanding of the underlying computer vision principles.
 
 ## Project Structure
 
@@ -28,17 +30,18 @@ The implementation includes:
 ## Features
 
 ### Object Detection
-- Grayscale conversion with saturation-based adjustment
-- Adaptive thresholding
-- Morphological operations (erosion, dilation, opening, closing)
+- Custom grayscale conversion with saturation-based adjustment
+- Manual thresholding implementation using pixel-by-pixel operations
+- Custom morphological operations (erosion, dilation, opening, closing)
 - Connected component analysis with size filtering
 
 ### Feature Extraction
-- Percent filled (area / bounding box area)
-- Aspect ratio
-- Hu moments (rotation invariant shape descriptors)
-- Center of mass
+- Percent filled (area / oriented bounding box area)
+- Aspect ratio (ratio of the oriented bounding box dimensions)
+- Hu moments (first two moments - rotation invariant shape descriptors)
+- Center of mass (centroid)
 - Principal axis orientation
+- Oriented bounding box
 
 ### Classification
 - Nearest neighbor classification
@@ -113,7 +116,9 @@ The confusion matrix feature allows for quantitative evaluation of classificatio
 
 - Current implementation relies on shape features only
 - Performance depends on good thresholding
+- Objects trained under bright lighting may be misclassified under dim lighting due to changes in thresholded region shapes
 - Future improvements could include:
+  - Better handling of lighting variations through adaptive preprocessing
   - Color-based features
   - Texture analysis
   - Machine learning approaches
